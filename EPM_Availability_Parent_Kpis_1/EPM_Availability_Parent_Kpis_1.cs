@@ -151,6 +151,10 @@ namespace EPM_Availability_All_Endpoints_1
         {
             switch (systemType)
             {
+                case "Customer":
+                    return new Tuple<int, string>(3500, String.Format("fullFilter=(9502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 3502, 3503, 3505, 3513, 3509, 3511, 3507));
+                case "Vendor":
+                    return new Tuple<int, string>(3500, String.Format("fullFilter=(9502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 4502, 4503, 4505, 4513, 4509, 4511, 4507));
                 case "Network":
                     return new Tuple<int, string>(9500, String.Format("fullFilter=(9502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 9502, 9503, 9505, 9513, 9509, 9511, 9507));
                 case "Region":
@@ -177,6 +181,20 @@ namespace EPM_Availability_All_Endpoints_1
 
             switch (systemType)
             {
+                case "Customer":
+                    unreachableMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 3505, key) };
+                    avgPacketLossMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 3513, key) };
+                    avgJitterMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 3509, key) };
+                    avgLatencyMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 3511, key) };
+                    avgRttMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 3507, key) };
+                    return new GenIfRowMetadata(new[] { unreachableMetadata, avgPacketLossMetadata, avgJitterMetadata, avgLatencyMetadata, avgRttMetadata });
+                case "Vendor":
+                    unreachableMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 4505, key) };
+                    avgPacketLossMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 4513, key) };
+                    avgJitterMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 4509, key) };
+                    avgLatencyMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 4511, key) };
+                    avgRttMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 4507, key) };
+                    return new GenIfRowMetadata(new[] { unreachableMetadata, avgPacketLossMetadata, avgJitterMetadata, avgLatencyMetadata, avgRttMetadata });
                 case "Network":
                     unreachableMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 9505, key) };
                     avgPacketLossMetadata = new ObjectRefMetadata { Object = new ParamID(Convert.ToInt32(dmaIdParts[0]), Convert.ToInt32(dmaIdParts[1]), 9513, key) };

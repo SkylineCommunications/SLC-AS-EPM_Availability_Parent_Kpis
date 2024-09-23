@@ -18,6 +18,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.2.0.25" />
+		<PackageReference Include="Skyline.DataMiner.Files.SLAnalyticsTypes" Version="10.4.10" />
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>
