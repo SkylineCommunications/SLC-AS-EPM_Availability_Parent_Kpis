@@ -152,9 +152,9 @@ namespace EPM_Availability_All_Endpoints_1
             switch (systemType)
             {
                 case "Customer":
-                    return new Tuple<int, string>(3500, String.Format("fullFilter=(9502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 3502, 3503, 3505, 3513, 3509, 3511, 3507));
+                    return new Tuple<int, string>(3500, String.Format("fullFilter=(3502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 3502, 3503, 3505, 3513, 3509, 3511, 3507));
                 case "Vendor":
-                    return new Tuple<int, string>(3500, String.Format("fullFilter=(9502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 4502, 4503, 4505, 4513, 4509, 4511, 4507));
+                    return new Tuple<int, string>(4500, String.Format("fullFilter=(4502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 4502, 4503, 4505, 4513, 4509, 4511, 4507));
                 case "Network":
                     return new Tuple<int, string>(9500, String.Format("fullFilter=(9502=={0});columns={1},{2},{3},{4},{5},{6},{7}", systemName, 9502, 9503, 9505, 9513, 9509, 9511, 9507));
                 case "Region":
@@ -290,10 +290,11 @@ namespace EPM_Availability_All_Endpoints_1
             {
                 for (int i = 0; i < kpiRow[0].Count(); i++)
                 {
-                    var key = Convert.ToString(kpiRow[1][i].CellValue);
+                    var key = Convert.ToString(kpiRow[0][i].CellValue);
                     var oltRow = new KpisOverview
                     {
-                        Name = key,
+                        Key = key,
+                        Name = Convert.ToString(kpiRow[1][i].CellValue),
                         NumberEndpoints = Convert.ToInt32(kpiRow[2][i].CellValue),
                         UnreachableEndpoints = Convert.ToDouble(kpiRow[3][i].CellValue),
                         AveragePacketLossRate = Convert.ToDouble(kpiRow[4][i].CellValue),
@@ -351,7 +352,7 @@ namespace EPM_Availability_All_Endpoints_1
                     },
                 };
 
-                var rowMetadata = GetSystemTypeMetaData(kpiRow.Name);
+                var rowMetadata = GetSystemTypeMetaData(kpiRow.Key);
                 var gqiRow = new GQIRow(listGqiCells.ToArray()) { Metadata = rowMetadata };
 
                 listGqiRows.Add(gqiRow);
@@ -379,6 +380,8 @@ namespace EPM_Availability_All_Endpoints_1
 
     public class KpisOverview
     {
+        public string Key { get; set; }
+
         public string Name { get; set; }
 
         public int NumberEndpoints { get; set; }
