@@ -1,6 +1,7 @@
 **/bin/*
 **/obj/*
 .vs/*
+**/.vs/*
 packages/*
 **/.svn
 _git2_*
@@ -15,3 +16,8 @@ _git2_*
 **.user
 # NuGet migration
 MigrationBackup/*
+# .dmprotocol packages in root folder
+*.dmprotocol
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
